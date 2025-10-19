@@ -10,7 +10,7 @@ const WaitlistBanner = ({ selectedCount, onOpenWaitlist }: WaitlistBannerProps) 
   if (selectedCount === 0) return null;
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-fade-in-up">
+    <div className="fixed bottom-6 right-0 px-6 -translate-x-1/2 z-50 animate-fade-in-up">
       <div className="bg-primary text-white px-6 py-4 rounded-full shadow-2xl flex items-center gap-4">
         <div className="flex items-center gap-2">
           <ShoppingBag className="w-5 h-5" />

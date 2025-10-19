@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client";
+
+import { useState ,useRef, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,7 +12,9 @@ import Footer from "@/components/Footer";
 import ProductModal from "@/components/ProductModal";
 import WaitlistModal from "@/components/WaitlistModal";
 import WaitlistBanner from "@/components/WaitlistBanner";
-import { ReactLenis, useLenis } from 'lenis/react';
+import AnnouncementBar from "@/components/AnnouncementBar";
+import Lenis from 'lenis';
+import { ReactLenis, useLenis, type LenisRef  } from 'lenis/react';
 
 
 const Index = () => {
@@ -19,10 +23,16 @@ const Index = () => {
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
 
-  const lenis = useLenis((lenis) => {
-    // called every scroll
-    console.log(lenis)
-  })
+  // useEffect(() => {
+  //   const lenis = new Lenis({
+  //     lerp: 0.1,
+  //   });
+  //   function raf (time: any) {
+  //     lenis.raf(time)
+  //     requestAnimationFrame(raf)
+  //   }
+  //   requestAnimationFrame(raf)
+  // }, []);
 
   const handleProductClick = (product: { name: string; image: string; price: string }) => {
     setCurrentProduct(product);
@@ -51,13 +61,22 @@ const Index = () => {
     setSelectedProducts([]);
   };
 
+    const handleRemoveProduct = (productName: string) => {
+    setSelectedProducts(selectedProducts.filter((name) => name !== productName));
+  };
+
   const selectedProductsData = products.filter((p) => selectedProducts.includes(p.name));
 
   return (
+      //       <>
+      //   <ReactLenis 
+      //     className="wrapper"
+      //     root="asChild"
+      //     ref={lenisRef}
+      // >
     <div className="min-h-screen">
-        <ReactLenis root />
-        {}
-      <Navbar onJoinWaitlist={handleOpenWaitlist} />
+      <AnnouncementBar />
+      <Navbar onJoinWaitlist={handleOpenWaitlist} selectedCount={selectedProducts.length} />
       <Hero onJoinWaitlist={handleOpenWaitlist} />
 
       <About />
@@ -65,7 +84,7 @@ const Index = () => {
         selectedProducts={selectedProducts}
         onProductClick={handleProductClick}
       />
-      <Features />
+      {/* <Features /> */}
       {/* <Testimonials /> */}
       <CTA onJoinWaitlist={handleOpenWaitlist} />
       {/* <Footer /> */}
@@ -77,6 +96,7 @@ const Index = () => {
         isSelected={currentProduct ? selectedProducts.includes(currentProduct.name) : false}
         onToggleSelect={handleToggleSelect}
         canSelect={selectedProducts.length < 2}
+        onOpenWaitlist={handleOpenWaitlist}
       />
 
       <WaitlistModal
@@ -84,13 +104,17 @@ const Index = () => {
         onClose={() => setIsWaitlistModalOpen(false)}
         selectedProducts={selectedProductsData}
         onSuccess={handleWaitlistSuccess}
+        onRemoveProduct={handleRemoveProduct}
       />
 
-      <WaitlistBanner
-        selectedCount={selectedProducts.length}
-        onOpenWaitlist={handleOpenWaitlist}
-      />
+        <WaitlistBanner
+          selectedCount={selectedProducts.length}
+          onOpenWaitlist={handleOpenWaitlist}
+        />
+
     </div>
+      //     </ReactLenis>
+      // </>
   );
 };
 

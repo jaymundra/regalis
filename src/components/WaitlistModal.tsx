@@ -4,16 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Check } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 interface WaitlistModalProps {
   isOpen: boolean;
   onClose: () => void;
-  selectedProducts: Array<{ name: string; image: string; price: string }>;
+  selectedProducts: Array<{ name: string; images: string[]; price: string, discounted: string }>;
   onSuccess: () => void;
+  onRemoveProduct: (productName: string) => void;
 }
 
-const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess }: WaitlistModalProps) => {
+const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveProduct }: WaitlistModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +29,7 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess }: Waitlis
     }
 
     // Simulate form submission
-    toast.success("Welcome to the waitlist! Check your email for confirmation.", {
+    toast.success("Welcome to the waitlist!", {
       description: "You'll receive 50% off when we launch your selected shoes.",
     });
     
@@ -45,7 +46,7 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess }: Waitlis
             Join the Waitlist
           </DialogTitle>
           <p className="text-muted-foreground mt-2">
-            Get 50% off these exclusive shoes when we launch
+            Get 50% off for the shoes you reserve
           </p>
         </DialogHeader>
 
@@ -54,17 +55,26 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess }: Waitlis
           {selectedProducts.length > 0 && (
             <div className="mb-6">
               <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">Your Selection</h3>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {selectedProducts.map((product) => (
-                  <div key={product.name} className="flex items-center gap-3 bg-secondary p-3 rounded-lg">
+                    <div key={product.name} className=" flex items-center gap-3 bg-secondary p-3 rounded-lg relative">
+                   
+                    <button
+                      onClick={() => onRemoveProduct(product.name)}
+                      className="absolute top-2 right-2 h-6 w-6 rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 flex items-center justify-center transition-colors"
+                      aria-label="Remove product"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
                     <img
-                      src={product.image}
+                      src={product.images[0]}
                       alt={product.name}
                       className="w-16 h-16 object-cover rounded"
                     />
                     <div>
                       <p className="font-semibold text-sm">{product.name}</p>
-                      <p className="text-xs text-muted-foreground line-through">{product.price}</p>
+                      <p className="text-xs text-muted-foreground line-through inline">{product.price} </p>
+                      <p className="text-xs text-muted-foreground inline whitespace-nowrap">  {product.discounted}</p>
                       <p className="text-sm text-primary font-bold">
                         50% OFF at Launch
                       </p>
@@ -105,7 +115,7 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess }: Waitlis
               <div className="flex items-start gap-2">
                 <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-muted-foreground">
-                  By joining, you'll be first to know when we launch and receive an exclusive 50% discount code for your selected shoes.
+                  By joining, you'll be first to know when we launch and receive an exclusive 50% discount code for your selected shoes. We promise not to spam or share your data
                 </p>
               </div>
             </div>

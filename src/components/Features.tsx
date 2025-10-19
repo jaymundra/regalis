@@ -19,7 +19,7 @@ const features = [
   },
   {
     icon: Truck,
-    title: "Free Global Shipping",
+    title: "Free Shipping",
     description: "Complimentary worldwide delivery on all orders, because luxury knows no borders.",
   },
 ];

@@ -24,23 +24,23 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="py-32 bg-secondary">
-      <div className="container mx-auto px-6 ">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+    <section id="about" ref={sectionRef} className="m-0 p-0 bg-secondary">
+      <div className="w-screen">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Image */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          <div className={`transition-all duration-1000 bg-black ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="relative overflow-hidden rounded-lg shadow-2xl">
               <img 
                 src={craftsmanship} 
                 alt="Artisan crafting shoes" 
-                className="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-700"
+                className="object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
           </div>
           
 
           {/* Text Content */}
-          <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
+          <div className={`transition-all duration-1000 px-10 py-10 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <h2 className="text-5xl font-bold uppercase mb-6 text-foreground tracking-tight">
               <SplitText text="Every Step" /> <br />
               <span className="text-primary"> <SplitText text="A Statement" /></span>
@@ -53,7 +53,7 @@ const About = () => {
             <p className="text-lg text-muted-foreground leading-relaxed">
               We source only the finest leather and materials, ensuring every pair is a masterpiece of form and function. Our dedication to excellence has made us a symbol of refined taste for those who demand the best.
             </p>
-          </div>
+          </div> 
         </div>
       </div>
     </section>
