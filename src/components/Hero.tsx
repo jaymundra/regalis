@@ -12,7 +12,7 @@ const words = ['all day', 'every day', 'any where'];
 
 const Hero = ({ onJoinWaitlist }: HeroProps) => {
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pb-20">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pb-20 pt-20">
       {/* Content */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">

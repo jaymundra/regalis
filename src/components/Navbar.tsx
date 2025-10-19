@@ -31,7 +31,7 @@ const Navbar = ({ onJoinWaitlist, selectedCount = 0 }: NavbarProps) => {
 
   return (
     <nav
-      className={`fixed w-screen flex left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed w-screen flex left-0 right-0 z-50 transition-all duration-500 h-16 ${
         scrolled ? "top-0 bg-background/95 backdrop-blur-sm shadow-sm py-3" : "bg-secondary py-3"
       }`}
     >
