@@ -19,7 +19,7 @@ const Hero = ({ onJoinWaitlist }: HeroProps) => {
           {/* Text Content */}
           <div className="text-left">
             <h1 className="text-5xl max-md:text-center md:text-7xl font-bold uppercase tracking-tight mb-6 fade-in-up text-foreground">
-              <SplitText text="As Comfy As" /> <br />
+              <SplitText text="As Comfy As"/> <br />
               <span className="text-primary"><SplitText text="SNEAKERS" /></span>
             </h1>
             

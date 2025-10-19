@@ -15,13 +15,16 @@ import WaitlistBanner from "@/components/WaitlistBanner";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Lenis from 'lenis';
 import { ReactLenis, useLenis, type LenisRef  } from 'lenis/react';
+import { usePageView, trackClick, trackScroll } from "@/hooks/useAnalytics";
 
 
 const Index = () => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
-  const [currentProduct, setCurrentProduct] = useState<{ name: string; image: string; price: string } | null>(null);
+  const [currentProduct, setCurrentProduct] = useState<{ name: string; images: string []; price: string, discounted: string } | null>(null);
   const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
+
+  const productsRef = useRef<HTMLElement>(null);
 
   // useEffect(() => {
   //   const lenis = new Lenis({
@@ -34,7 +37,10 @@ const Index = () => {
   //   requestAnimationFrame(raf)
   // }, []);
 
-  const handleProductClick = (product: { name: string; image: string; price: string }) => {
+  usePageView('Home');
+
+  const handleProductClick = (product: { name: string; images: string []; price: string, discounted: string }) => {
+    trackClick('product_card', 'card');
     setCurrentProduct(product);
     setIsProductModalOpen(true);
   };
@@ -43,25 +49,34 @@ const Index = () => {
     if (!currentProduct) return;
 
     if (selectedProducts.includes(currentProduct.name)) {
+      trackClick('deselect_product', 'toggle');
       setSelectedProducts(selectedProducts.filter((name) => name !== currentProduct.name));
     } else if (selectedProducts.length < 2) {
+      trackClick('select_product', 'toggle');
       setSelectedProducts([...selectedProducts, currentProduct.name]);
     }
   };
 
   const handleOpenWaitlist = () => {
-    if (selectedProducts.length === 0) {
-      setIsWaitlistModalOpen(true);
-    } else {
-      setIsWaitlistModalOpen(true);
+    trackClick('open_waitlist', 'button');
+    setIsWaitlistModalOpen(true);
+    setIsProductModalOpen(false);
+  };
+
+  const handleAddProducts = () => {
+    trackClick('add_products', 'button');
+    if (productsRef.current) {
+      productsRef.current.scrollIntoView({ behavior: 'smooth' });
+      trackScroll('products');
     }
+    setIsProductModalOpen(false);
   };
 
   const handleWaitlistSuccess = () => {
     setSelectedProducts([]);
   };
 
-    const handleRemoveProduct = (productName: string) => {
+  const handleRemoveProduct = (productName: string) => {
     setSelectedProducts(selectedProducts.filter((name) => name !== productName));
   };
 
@@ -80,10 +95,12 @@ const Index = () => {
       <Hero onJoinWaitlist={handleOpenWaitlist} />
 
       <About />
-      <Products 
-        selectedProducts={selectedProducts}
-        onProductClick={handleProductClick}
-      />
+      <section ref={productsRef} className="snap-start snap-always">
+        <Products 
+          selectedProducts={selectedProducts}
+          onProductClick={handleProductClick}
+        /> 
+      </section>
       {/* <Features /> */}
       {/* <Testimonials /> */}
       <CTA onJoinWaitlist={handleOpenWaitlist} />
@@ -105,6 +122,7 @@ const Index = () => {
         selectedProducts={selectedProductsData}
         onSuccess={handleWaitlistSuccess}
         onRemoveProduct={handleRemoveProduct}
+        onAddProducts={handleAddProducts}
       />
 
         <WaitlistBanner

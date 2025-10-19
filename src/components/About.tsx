@@ -24,8 +24,7 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="m-0 p-0 bg-secondary">
-      <div className="w-screen">
+    <section id="about" ref={sectionRef} className="m-0 p-0 bg-secondary w-full">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Image */}
           <div className={`transition-all duration-1000 bg-black ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
@@ -55,7 +54,6 @@ const About = () => {
             </p>
           </div> 
         </div>
-      </div>
     </section>
   );
 };

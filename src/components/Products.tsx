@@ -41,7 +41,7 @@ export const products = [
 
 interface ProductsProps {
   selectedProducts: string[];
-  onProductClick: (product: { name: string; image: string; price: string }) => void;
+  onProductClick: (product: { name: string; images: string []; price: string, discounted: string }) => void;
 }
 
 const Products = ({ selectedProducts, onProductClick }: ProductsProps) => {

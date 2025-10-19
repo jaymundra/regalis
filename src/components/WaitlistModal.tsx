@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Check, X } from "lucide-react";
+import { addToWaitlist } from "@/lib/firebaseService";
+import { trackEvent } from "@/hooks/useAnalytics";
+import { Check, X, Plus } from "lucide-react";
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -12,15 +14,18 @@ interface WaitlistModalProps {
   selectedProducts: Array<{ name: string; images: string[]; price: string, discounted: string }>;
   onSuccess: () => void;
   onRemoveProduct: (productName: string) => void;
+  onAddProducts: () => void;
 }
 
-const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveProduct }: WaitlistModalProps) => {
+const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveProduct, onAddProducts }: WaitlistModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.email) {
@@ -28,15 +33,55 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveP
       return;
     }
 
-    // Simulate form submission
-    toast.success("Welcome to the waitlist!", {
-      description: "You'll receive 50% off when we launch your selected shoes.",
-    });
-    
-    setFormData({ name: "", email: "" });
-    onSuccess();
-    onClose();
+    setIsSubmitting(true);
+
+    try {
+      const result = await addToWaitlist({
+        name: formData.name,
+        email: formData.email,
+        selectedProducts,
+      });
+
+      if (result.success) {
+        trackEvent('waitlist_signup', {
+          products_count: selectedProducts.length,
+          products: selectedProducts.map(p => p.name),
+        });
+
+        toast.success("Welcome to the waitlist!", {
+          description: "You'll receive 50% off when we launch your selected shoes.",
+        });
+        
+        setFormData({ name: "", email: "" });
+        onSuccess();
+        onClose();
+      } else {
+        toast.error("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      toast.error("Failed to join waitlist. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+    
+  //   if (!formData.name || !formData.email) {
+  //     toast.error("Please fill in all fields");
+  //     return;
+  //   }
+
+  //   // Simulate form submission
+  //   toast.success("Welcome to the waitlist!", {
+  //     description: "You'll receive 50% off when we launch your selected shoes.",
+  //   });
+    
+  //   setFormData({ name: "", email: "" });
+  //   onSuccess();
+  //   onClose();
+  // };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -52,9 +97,25 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveP
 
         <div className="mt-6">
           {/* Selected Products */}
-          {selectedProducts.length > 0 && (
+          {selectedProducts.length > 0 ? (
             <div className="mb-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wide mb-3">Your Selection</h3>
+              <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-semibold uppercase tracking-wide">Your Selection</h3>
+               {selectedProducts.length < 2 && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      onAddProducts();
+                      onClose();
+                    }}
+                    className="gap-2"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Add More
+                  </Button>
+                )}
+                </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {selectedProducts.map((product) => (
                     <div key={product.name} className=" flex items-center gap-3 bg-secondary p-3 rounded-lg relative">
@@ -82,6 +143,21 @@ const WaitlistModal = ({ isOpen, onClose, selectedProducts, onSuccess, onRemoveP
                   </div>
                 ))}
               </div>
+            </div>
+          ):(
+            <div className="mb-6 p-6 bg-secondary rounded-lg text-center">
+              <p className="text-muted-foreground mb-4">No products selected yet</p>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  onAddProducts();
+                  onClose();
+                }}
+                className="gap-2"
+              >
+                <Plus className="h-4 w-4" />
+                Browse Products
+              </Button>
             </div>
           )}
 
