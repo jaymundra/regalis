@@ -9,7 +9,7 @@
 ## Step 2: Register Your Web App
 
 1. In your Firebase project, click on the web icon (</>) to add a web app
-2. Register your app with a nickname (e.g., "Regalis Waitlist")
+2. Register your app with a nickname (e.g., "Easivo Waitlist")
 3. Firebase will provide you with a configuration object
 
 ## Step 3: Update Firebase Configuration

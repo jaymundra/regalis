@@ -46,11 +46,11 @@ const About = () => {
             </h2>
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              At Regalis, each shoe is meticulously crafted by artisans who believe in timeless style and lasting comfort.
+              For too long, professionals have accepted pain as the price of looking good. Not anymore. Our formal shoes combine proprietary comfort technology with timeless elegance, delivering sneaker-level cushioning in executive-ready design. 
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We source only the finest leather and materials, ensuring every pair is a masterpiece of form and function. Our dedication to excellence has made us a symbol of refined taste for those who demand the best.
+              Experience all-day comfort without compromising your professional image. Because you shouldn't have to choose between your feet and your career.
             </p>
           </div> 
         </div>

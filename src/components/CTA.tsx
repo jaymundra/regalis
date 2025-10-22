@@ -114,7 +114,7 @@ const CTA = ({ onJoinWaitlist }: CTAProps) => {
       </div>
               <div className="pt-5  text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 Regalis Shoes. Crafted with purpose.
+            © 2025 Easivo Shoes. Crafted with purpose.
           </p> 
          </div>
     </section>

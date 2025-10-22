@@ -34,7 +34,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold uppercase tracking-wider mb-4 text-foreground">
-              Regalis
+              Easivo
             </h3>
             <p className="text-muted-foreground italic">
               Crafted with purpose.
@@ -100,7 +100,7 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-border text-center">
           <p className="text-muted-foreground text-sm">
-            © 2025 Regalis Shoes. Crafted with purpose.
+            © 2025 Easivo Shoes. Crafted with purpose.
           </p>
         </div>
       </div>

@@ -63,10 +63,10 @@ const Navbar = ({ onJoinWaitlist, selectedCount = 0 }: NavbarProps) => {
 
         {/* Logo - centered on mobile, left on desktop */}
         <a 
-          href="/regalis/" 
+          href="/easivo/" 
           className="text-2xl font-bold text-foreground tracking-wider uppercase md:static absolute left-1/2 md:left-0 -translate-x-1/2 md:translate-x-0"
         >
-          Regalis
+          Easivo
         </a>
 
         {/* Desktop Navigation */}

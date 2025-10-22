@@ -10,12 +10,12 @@ const testimonials = [
   {
     name: "Isabella Martinez",
     role: "Corporate Lawyer",
-    quote: "Regalis shoes are my secret weapon. They command attention and respect in every room I enter.",
+    quote: "Easivo shoes are my secret weapon. They command attention and respect in every room I enter.",
   },
   {
     name: "James Sullivan",
     role: "Investment Banker",
-    quote: "I've tried dozens of luxury brands, but nothing compares to the craftsmanship and attention to detail at Regalis.",
+    quote: "I've tried dozens of luxury brands, but nothing compares to the craftsmanship and attention to detail at Easivo.",
   },
 ];
 

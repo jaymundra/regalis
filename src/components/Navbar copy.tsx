@@ -73,7 +73,7 @@ const Navbar = ({ onJoinWaitlist }: NavbarProps) => {
       <div className="absolute left-1/2 -translate-x-1/2 text-center">
         {/* <div className="container mx-auto px-6 md:flex items-center justify-center max-md:text-center max-md:absolute max-md:inset-0"></div> */}
         <a href="/" className="text-2xl font-bold text-foreground tracking-wider uppercase">
-          Regalis
+          Easivo
         </a>
 
         <div className="hidden md:flex items-center gap-8">
