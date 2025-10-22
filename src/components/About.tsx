@@ -46,7 +46,8 @@ const About = () => {
             </h2>
             
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              For too long, professionals have accepted pain as the price of looking good. Not anymore. Our formal shoes combine proprietary comfort technology with timeless elegance, delivering sneaker-level cushioning in executive-ready design. 
+              For far too long, Indians have been wearing formal shoes designed for western feet. Well not anymore. We have designed our shoes for Indian feet which will give you the shoes you always deserved.
+              Our formal shoes combine proprietary comfort technology with timeless elegance, delivering sneaker-level cushioning in executive-ready design. 
             </p>
             
             <p className="text-lg text-muted-foreground leading-relaxed">

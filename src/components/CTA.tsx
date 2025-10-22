@@ -13,7 +13,7 @@ const features = [
   {
     icon: Sparkles,
     title: "Proprietary Tech",
-    description: "We leverage cutting-edge technology to enhance your footwear experience.",
+    description: "We leverage cutting-edge biomechanics design to enhance your comfort.",
   },
   {
     icon: Award,
@@ -23,12 +23,12 @@ const features = [
   {
     icon: Heart,
     title: "Comfort Redefined",
-    description: "Engineered for all-day wear without compromising on style or elegance.",
+    description: "Engineered for all-day wear for Indian feet without compromising on style.",
   },
   {
     icon: Truck,
     title: "Free Shipping",
-    description: "Complimentary delivery on all orders, because luxury knows no borders.",
+    description: "Complimentary delivery on all orders, 15 days no-questions-asked returns.",
   },
 ];
 
