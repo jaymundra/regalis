@@ -13,8 +13,6 @@ import ProductModal from "@/components/ProductModal";
 import WaitlistModal from "@/components/WaitlistModal";
 import WaitlistBanner from "@/components/WaitlistBanner";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import Lenis from 'lenis';
-import { ReactLenis, useLenis, type LenisRef  } from 'lenis/react';
 import { usePageView, trackClick, trackScroll } from "@/hooks/useAnalytics";
 
 
