@@ -40,8 +40,8 @@ const About = () => {
 
           {/* Text Content */}
           <div className={`transition-all duration-1000 px-10 py-10 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <h2 className="text-5xl font-bold uppercase mb-6 text-foreground tracking-tight">
-              <SplitText text="Every Step" /> <br />
+            <h2 className="text-5xl font-bold uppercase mb-6 text-foreground tracking-tight max-md:text-center">
+              <SplitText text="Every Step," /> <br />
               <span className="text-primary"> <SplitText text="A Statement" /></span>
             </h2>
             
