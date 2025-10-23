@@ -25,9 +25,8 @@ export const trackEvent = (eventName: string, eventParams?: Record<string, any>)
 };
 
 export const trackClick = (elementName: string, elementType?: string) => {
-  trackEvent('click', {
-    element_name: elementName,
-    element_type: elementType || 'button',
+  trackEvent(elementName, {
+    element_prop: elementType || 'button',
   });
 };
 

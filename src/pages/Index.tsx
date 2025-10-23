@@ -38,7 +38,7 @@ const Index = () => {
   usePageView('Home');
 
   const handleProductClick = (product: { name: string; images: string []; price: string, discounted: string }) => {
-    trackClick('product_card', 'card');
+    trackClick('product_card', product.name);
     setCurrentProduct(product);
     setIsProductModalOpen(true);
   };
@@ -47,10 +47,10 @@ const Index = () => {
     if (!currentProduct) return;
 
     if (selectedProducts.includes(currentProduct.name)) {
-      trackClick('deselect_product', 'toggle');
+      trackClick('deselect_product', currentProduct.name);
       setSelectedProducts(selectedProducts.filter((name) => name !== currentProduct.name));
     } else if (selectedProducts.length < 2) {
-      trackClick('select_product', 'toggle');
+      trackClick('select_product', currentProduct.name);
       setSelectedProducts([...selectedProducts, currentProduct.name]);
     }
   };
@@ -75,6 +75,7 @@ const Index = () => {
   };
 
   const handleRemoveProduct = (productName: string) => {
+    trackClick('remove_product', productName);
     setSelectedProducts(selectedProducts.filter((name) => name !== productName));
   };
 
